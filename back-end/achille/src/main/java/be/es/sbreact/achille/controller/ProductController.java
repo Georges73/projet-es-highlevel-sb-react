@@ -41,8 +41,9 @@ public class ProductController {
 	private MapValidationErrorService validationErrorService;
 
 	// @Autowired
-	public ProductController(ProductDao productDao) {
+	public ProductController(ProductDao productDao, MapValidationErrorService validationErrorService) {
 		this.productDao = productDao;
+		this.validationErrorService = validationErrorService;
 	}
 
 	@GetMapping(value = "/title/{title}", produces = "application/json; charset=utf-8")
@@ -55,17 +56,14 @@ public class ProductController {
 		return productsFound;
 	}
 
-	/** * find all *************************************************** * */
+	/** * find all ***********Pas besoin de responseentity******************** * */
 
-	@GetMapping(value = "/findAllThyme", produces = "application/json; charset=utf-8")
-	public String getTitleThyme(Model model) throws Exception {
+	@GetMapping(value = "/findAll")
+	public Iterable<Products> findAll() throws Exception {
 
-		List<Products> allproducts = productDao.findAll();
-		System.err.println("----------------------findAllThyme-----------------------");
-		model.addAttribute("products", allproducts);
-		// ModelAndView mav = new ModelAndView("booksPage");
+		
 
-		return "booksPage";
+		return productDao.findAll();
 	}
 
 	/**
@@ -103,7 +101,8 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteProductkById(@PathVariable String id) {
+	public ResponseEntity<?> deleteProductkById(@PathVariable String id) {
 		productDao.deleteProductById(id);
-	}
+		
+		return new ResponseEntity<String>("Project with ID: '"+id+"' was deleted", HttpStatus.OK);	}
 }

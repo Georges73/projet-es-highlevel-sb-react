@@ -141,7 +141,7 @@ public class ProductDao {
 
 	// *****************************************************************************************************
 
-	public List<Products> findAll() throws Exception {
+	public Iterable<Products> findAll() throws Exception {
 
 		SearchRequest searchRequest = new SearchRequest();
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
@@ -164,6 +164,7 @@ public class ProductDao {
 			String productJson = objectMapper.writeValueAsString(product);
 			updateRequest.doc(productJson, XContentType.JSON);
 			UpdateResponse updateResponse = restHighLevelClient.update(updateRequest);
+			// Updateresponse est necessaire pour retourner le doc avec l'update
 			Map<String, Object> sourceAsMap = updateResponse.getGetResult().sourceAsMap();
 			return sourceAsMap;
 		} catch (JsonMappingException e) {

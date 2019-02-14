@@ -49,7 +49,7 @@ public class ProductController {
 	public List<Products> getTitle(@PathVariable String title, Model model) throws IOException {
 		System.err.println("----------------------Title-----------------------");
 
-		List<Products> productsFound = productDao.getProductByTitle(title);
+		List<Products> productsFound = productDao.getProductByTitle(title.toLowerCase());
 		model.addAttribute("products", productsFound);
 
 		return productsFound;
@@ -74,7 +74,7 @@ public class ProductController {
 	 */
 	@GetMapping("/{id}")
 	public Map<String, Object> getProductById(@PathVariable String id) {
-		return productDao.getProductById(id);
+		return productDao.getProductById(id.toLowerCase());
 	}
 
 	/**

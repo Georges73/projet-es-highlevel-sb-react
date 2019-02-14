@@ -69,10 +69,11 @@ public class ProductDao {
 			e.getLocalizedMessage();
 		}
 		Map<String, Object> sourceAsMap = getResponse.getSourceAsMap();
+		
 		return sourceAsMap;
 	}
 
-	String product = "hello";
+	
 
 	// ----------------------------------------------------------------------------------------------------------------------
 

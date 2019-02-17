@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ import be.es.sbreact.achille.model.Products;
 @RestController
 //@Controller
 @RequestMapping("/products")
+@CrossOrigin
 public class ProductController {
 
 	@Autowired
@@ -81,8 +83,10 @@ public class ProductController {
 	 */
 
 	@PostMapping
+	@GetMapping(value = "/insert")
 	public ResponseEntity<?> insertProduct(@RequestBody Products product, BindingResult result) throws Exception {
 
+		System.err.println("Insert ???");
 		ResponseEntity<?> errorMap = validationErrorService.MapvalidationService(result);
 		if(errorMap != null) return errorMap;
 		

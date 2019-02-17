@@ -16,7 +16,7 @@ public class Products {
 	//private Completion suggest;
     
     
-	public Products(String id, String title, String description,String manufacturer, float price) {
+	public Products(String title, String id,  String description,String manufacturer, float price) {
 		super();
 		this.id = id;
 		this.title = title;

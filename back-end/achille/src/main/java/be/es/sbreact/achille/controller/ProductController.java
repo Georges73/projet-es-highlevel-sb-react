@@ -42,6 +42,13 @@ public class ProductController {
 	@Autowired
 	private MapValidationErrorService validationErrorService;
 
+	
+	
+	public ProductController() {
+		super();
+		//System.err.println("tetstststsststststststst");
+	}
+
 	// @Autowired
 	public ProductController(ProductDao productDao, MapValidationErrorService validationErrorService) {
 		this.productDao = productDao;
@@ -60,10 +67,10 @@ public class ProductController {
 
 	/** * find all ***********Pas besoin de responseentity******************** * */
 
-	@GetMapping(value = "/findAll")
+	@RequestMapping( "/findAll")
 	public Iterable<Products> findAll() throws Exception {
 
-		
+		System.err.println("FindAll");
 
 		return productDao.findAll();
 	}

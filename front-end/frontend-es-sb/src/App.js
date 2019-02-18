@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ProductList from './components/Productlist';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Product List</h1>
         </header> 
+        <ProductList/>
       </div>
     );
   }

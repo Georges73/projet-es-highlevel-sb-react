@@ -2,24 +2,28 @@ import React, { Component } from 'react';
 
 class Productlist extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { products: []};
-      } 
+  state = {
+    isLoading: true,
+    groups: []
+  }; 
 
-      componentDidMount() {
-        fetch('http://localhost:8080/products/findAll')
-        .then((response) => response.json()) 
-        .then((responseData) => { 
-          this.setState({ 
-            cars: responseData._embedded.products,
-          }); 
-        })
-        .catch(err => console.error(err)); 
+  async componentDidMount() {
+    const response = await fetch('http://localhost:8080/products/findAll')
+    const body = await response.json();
+    this.setState({ groups: body, isLoading: false })
+
+       
+        //.catch(err => console.error(err)); 
       }
   
       render() {
-        const tableRows = this.state.products.map((product, index) => 
+
+        const {groups, isLoading} = this.state;
+
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+        const tableRows = this.state.groups.map((product, index) => 
           <tr key={index}>
             <td>{product.id}</td>
             <td>{product.title}</td>
